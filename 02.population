@@ -24,5 +24,11 @@ elevation <- bei.extra$elev
 #second method to select elements 
 elevation2 <- bei.extra[[11]]
 plot(elevation2)
-#install vegan at home 
+
+#3.10/10
+#passing from points to a continuous surface
+densitymap
+
+
+
 
