@@ -19,3 +19,20 @@ pldc4 = ldcl4 * 100 / total
 pldc1 + pldc2
 #to create a plot based exactly on those two axes
 plot(ord)
+
+
+
+install.packages("overlap")
+library(overlap)
+data(kerinci)
+head(kerinci)
+timeRad <- kerinci$Time * 2 * pi
+timeRad
+tig <- timeRad[kerinci$Sps=="tiger", ]
+tig <- timeRad[kerinci$Sps == "tiger"]
+densityplot(tig, rug= TRUE)
+
+maca <- kerinci[kerinci$Sps=="macaque",]
+timemaca <- maca$timeRad
+
+densityPlot(timemaca, rug=TRUE)
