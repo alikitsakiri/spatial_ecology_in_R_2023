@@ -1,0 +1,21 @@
+install.packages("vegan")
+install.packages("overlap")
+data(dune)
+dune
+library(vegan)
+ord <- decorana(dune)
+ord
+decorana
+ldc1 = 3.7004
+ldcl2 = 3.1166
+ldc3 = 1.30055
+ldcl4 = 1.47888
+total =ldc1 + ldcl2 +ldc3 + ldcl4
+pldc1 = ldc1 * 100 / total
+pldc2 = ldcl2 * 100 / total
+pldc3 = ldc3 * 100 / total
+pldc4 = ldcl4 * 100 / total
+#for th percentage of two axes
+pldc1 + pldc2
+#to create a plot based exactly on those two axes
+plot(ord)
