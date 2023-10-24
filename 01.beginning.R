@@ -1,25 +1,22 @@
-# Here I can write anything I want!!! 42 is the meaning of life univcerse and all!
 
-# R as a calculator
 2 + 3
 
-# Assign to an object
 zima <- 2 + 3
 zima
 
-duccio <- 5 + 3
-duccio
+aliki <- 5 + 3
+aliki
 
-final <- zima * duccio
+final <- zima * aliki
 final
 
 final^2
 
-# array
-sophi <- c(10, 20, 30, 50, 70) # microplastics 
-# fcuntions have parentheses and inside them there are arguments
 
-paula <- c(100, 500, 600, 1000, 2000) # people
+sophi <- c(10, 20, 30, 50, 70) 
+
+
+paula <- c(100, 500, 600, 1000, 2000) 
 
 plot(paula, sophi)
 
