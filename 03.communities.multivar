@@ -1,0 +1,28 @@
+install.packages("vegan")
+install.packages("sdm")
+installed.packages("terra")
+install.packages("rgdal")
+library(sdm)
+library(terra)
+library(rgdal)
+file <- system.file("external/species.shp", package="sdm")
+file
+rana <- vector(file)
+rana
+rana <- vector(life)
+rana$Occurrence
+species <- vect(life)
+species
+plot(species)
+file <- system.file("external/species.shp", package="sdm") 
+species <- vect(file)
+
+# looking at the set
+species
+
+# plot
+plot(species)
+presence <- species[species$Occurrence == 1]
+
+install.packages("rana")
+library(rana)
