@@ -8,3 +8,4 @@ devtools::install_github("ducciorocchini/imageRy")
 library(imageRy)
 im.list()
 im.import()
+#install_github("") to instal packages from github
