@@ -1,31 +1,43 @@
 #code related to population ecology
 #a package is needed for point pattern analysis
+
+#first we need to install our package
+
 install.packages ("spatstat")
+
+#we call our package to R
+
 library(spatstat)
 #lets use the bei data:
-
 
 bei
 
 #plotting the data
+
 plot (bei)
-plot(bei)
+
 plot(bei, cex=.5)
 plot(bei, cex=.2)
+
 #change the symbol - pch= point character
 plot(bei, cex=.2, pch=19)
+
 #additonal datasets
+
 bei.extra
 plot(bei.extra)
+
 #we need to use only one part of the dataset , so elevation
 #we need a symbol to link elevation to bei extra=
-#plot(bei.extra$elev)
+
+plot(bei.extra$elev)
 elevation <- bei.extra$elev
+
 #second method to select elements 
 elevation2 <- bei.extra[[11]]
 plot(elevation2)
 
-#3.10/10
+#next lesson 3.10/10
 #passing from points to a continuous surface
 densitymap
 
