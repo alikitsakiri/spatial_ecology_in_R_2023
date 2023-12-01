@@ -3,17 +3,24 @@
 #we use the 'set working directly'
 #setwd we put our path of my computer
 
-setwd(""C:/Users/Αλίκη/Desktop"")
+setwd("C:/Users/Αλίκη/Desktop")
   #if it doesnt work because my computer is stupid I can do: 
 getwd()
+#this provides me my path
+
+
 naja <- rast("najafiraq_etm_2003140_lrg.jpg")
 #lets plot the data
 #im.plotRGB
+
 plotRGB(naja, r=1, g=2, b=3)
+
 #next data
 najaaug <- rast("najafiraq_oli_2023219_lrg.jpg")
 plotRGB(najaaug, r=1, g=2, b=3)
+
 par(mfrow=c(2,1))
+
 #plot both of them together
 par(mfrow=c(2,1))
 plotRGB(najaaug, r=1, g=2, b=3)
@@ -27,6 +34,7 @@ plot(majadif, col=cl)
 
 #download my own image from nasa 
 #i downloaded an image of a deforestation called grachaco
+
 granchaco <- rast("granchaco_tmo_2000353_lrg.jpg")
 plotRGB(granchaco, r=1, g=2, b=3)
 #the rast function can do the same thing as we did for the previous classes with matogrosso
