@@ -1,10 +1,14 @@
 #remote sensing for ecosystem monitoring
 install.packages("devtools")
 install.packages("terra")
+#call the packages
+
 library(devtools)
 library(terra)
+
 # install the imageRy package from GitHub
 devtools::install_github("ducciorocchini/imageRy")
+
 library(imageRy)
 
 # arrays
