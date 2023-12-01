@@ -11,6 +11,80 @@ devtools::install_github("ducciorocchini/imageRy")
 
 library(imageRy)
 
+#lets list the data
+
+im.list()
+
+b2 <- im.import("sentinel.dolomites.b2.tif" )
+cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
+plot(b2, col=cl)
+
+b3 <- im.import("sentinel.dolomites.b3.tif"  )
+cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
+plot(b3, col=cl)
+
+
+b3 <- im.import("sentinel.dolomites.b3.tif")
+plot(b3, col=cl)
+
+b4 <- im.import("sentinel.dolomites.b4.tif")
+plot(b4, col=cl)
+
+#import the NIR band from sentinel -1 (band 8)
+b8 <- im.import("sentinel.dolomites.b8.tif")
+plot(b8, col=cl)
+par(mfrow=c(2,2))
+plot(b2, col=cl)
+plot(b3, col=cl)
+plot(b4, col=cl)
+plot(b8, col=cl)
+
+#stack images
+stacksent <- c(b2, b3, b4, b8)
+
+dev.off() #this closes the device
+
+plot(stacksent, col=cl)
+plot(stacksent[[4]], col=cl) #4th element
+par(mfrow=c(2,2))
+clgrey <- colorRampPalette(c("grey","dark grey","light grey")) (100)
+plot(b2, col=clgrey)
+clpink <- colorRampPalette(c("hot pink1","hot pink2","light pink")) (100)
+plot(b3, col=clpink)
+clblue <- colorRampPalette(c("blue","dark blue","light blue")) (100)
+plot(b4, col=clblue)
+clgreen <- colorRampPalette(c("green","dark green","light green")) (100)
+plot(b8, col=clgreen)
+
+#band2 grey element1, stacksent[[1]]
+#band3 pink element 2, stacksent[[2]]
+#band4 blue element3, stacksent[[3]]
+#band8 green element4, stacksent[[4]]
+im.plotRGB(stacksent, r=3, g=2, b=1)
+library(imageRy)
+library(terra)
+im.list()
+b2 <- im.import("sentinel.dolomites.b2.tif")
+b3 <- im.import("sentinel.dolomites.b3.tif")
+b4 <- im.import("sentinel.dolomites.b4.tif")
+b8 <- im.import("sentinel.dolomites.b8.tif")
+#stack images all together
+stacksent <- c(b2, b3, b4, b8)
+im.plotRGB(stacksent, r=3, g=2, b=1)
+im.plotRGB(stacksent, r=4, g=3, b=2)
+im.plotRGB(stacksent, r=3, g=4, b=1)
+im.plotRGB(stacksent, r=3, g=2, b=4)
+pairs(stacksent)
+
+
+
+
+
+
+
+
+
+
 # arrays
 diameter <- c(100, 10, 50, 20, 15)
 iron <- c(10, 1000, 20, 700, 900)
