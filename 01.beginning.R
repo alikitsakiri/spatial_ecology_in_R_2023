@@ -1,30 +1,30 @@
-
-2 + 3
-
-zima <- 2 + 3
-zima
+#the first lesson
+#with R we can do math operations like summing up
+#like 2 + 3
+maria <- 2 +3
 
 aliki <- 5 + 3
 aliki
 
-final <- zima * aliki
+final <- maria * aliki
 final
 
 final^2
 
 
-sophi <- c(10, 20, 30, 50, 70) 
+aliki2 <- c(10, 20, 30, 50, 70) 
 
 
-paula <- c(100, 500, 600, 1000, 2000) 
+maria2 <- c(100, 500, 600, 1000, 2000) 
 
-plot(paula, sophi)
+#we can plot the results
+plot(aliki2, maria2)
 
-plot(paula, sophi, xlab="number of people", ylab="microplastics")
+plot(aliki2, maria2, xlab="number of people", ylab="microplastics")
 
 
-people <- paula
-microplastics <- sophi
+people <- aliki2
+microplastics <- maria2
 
 plot(people, microplastics)
 plot(people, microplastics, pch=19)
