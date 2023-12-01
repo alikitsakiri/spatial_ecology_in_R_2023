@@ -1,6 +1,8 @@
 #code related to population ecology
 #a package is needed for point pattern analysis
-install.packages ("spatstat")
+#again the same package
+
+
 library(spatstat)
 #lets use the bei data:
 
