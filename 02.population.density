@@ -1,4 +1,7 @@
-install.packages("spatstat")
+#from the previous lesson we have the package spatstat
+#we dont need to install it aagin
+#we have to call it only, because it is already on the memory
+
 library(spatstat)
 bei
 plot(bei)
@@ -8,16 +11,24 @@ densitymap <- density(bei)
 densitymap
 plot(densitymap)
 points(bei, cex=.2)
+
+#now we can change the colors
+
 colorRampPalette(c("black","red", "orange", "yellow")) (100)
 c1 <- colorRampPalette(c("black", "red", "orange", "yellow")) (100)
 plot(densitymap, col=c1)
+
+#change again
+
 colorRampPalette(c("cyan", "coral", "coral2", "cyan1")) (100)
 c1 <- colorRampPalette(c("cyan", "coral", "coral2", "cyan1")) (100)
 plot(densitymap, col=c1)
 plot(bei.extra)
 elev <- bei.extra[[1]] #bei.extra$elev
 plot(elev)
+
 #multiframe
+
 par(mfrow=c(1,2))
 plot(densitymap)
 plot(elev)
