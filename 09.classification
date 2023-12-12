@@ -1,5 +1,5 @@
 #classification of pixels in the image 
-Wclassifying satellite images and estimate the amount change
+#classifying satellite images and estimate the amount change
 #with the function of im.classify(sun)
 #we need the previous packages
 library(terra)
@@ -9,14 +9,14 @@ im.list()
 
 #lets import the image of the sun
 sun <- im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
-#we can see the gases of the sun, yelloe, brown, black colors which means 3 levels - clusters
+#we can see the gases of the sun, yellow, brown, black colors which means 3 levels - clusters
 
 #lets classify it
 sunc <- im.classify(sun, num_clusters=3)
 plot(sunc)
 
 #classify satellite data
-#I want to import the matogrosso images
+#I want to import the matogrosso image
 
 im.list()
 m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")          
@@ -44,6 +44,7 @@ f1992
 #lets calculate the percentages
 tot1992 <- ncell(m1992c)
 #ncell is calculating the numbers of pixels
+
 #now the percentage
 p1992 <- f1992 * 100 / tot1992
 p1992
