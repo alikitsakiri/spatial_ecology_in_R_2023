@@ -70,5 +70,11 @@ tabout
 #lets do the final table
 
 tabout<- data.frame(class, yc1992, yc2006)
+install.packages("patchwork")
+library(ggplot2)
+library(patchwork)
 
-p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white") #geom= geometry of the bars
+p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identity", fill="white")
+p2 <- ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white")
+
+p1 + p2
