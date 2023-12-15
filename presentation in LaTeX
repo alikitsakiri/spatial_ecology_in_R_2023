@@ -1,0 +1,50 @@
+#lets do our first presentation in latex
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+
+\usetheme{Frankfurt} #we can use any theme we want
+\usecolortheme{crane} #we can use any color we want (crane= orange)
+\title{Presentation} #the title will be shown like this
+\author{alikimaria.tsakiri } #then it will be shown the name 
+\date{December 2023}#and then the date
+
+\begin{document}
+
+\maketitle
+
+% \section{Introduction}
+\begin{frame}{slide in Latex} #this will be shown on the top of the slide
+this is my first text of the presentation  #this is our text  
+\end{frame}
+\begin{frame}{items in latex beamer}
+    the main components are ecc ecc ecc
+    \begin{itemize}
+        \item population ecology
+        \item \pause community #pause to presents the item step by step not everything on the same slide, like each other to each slide, like a presentation step by step
+        \item \pause ecosystem
+    \end{itemize}
+\end{frame}
+\begin{frame} (image)
+\centering
+\includegraphics[width=0.4 \textwidth]{images.jpg}
+\end{frame}
+\begin{frame} (image)
+\centering
+\includegraphics[width=0.4 \textwidth]{images.jpg}
+\includegraphics[width=0.4 \textwidth]{images.jpg}\\
+\smallskip #or bigskip or nothing even
+\includegraphics[width=0.4 \textwidth]{images.jpg}
+\includegraphics[width=0.4 \textwidth]{images.jpg}\\
+\end{frame}
+
+\section{Formulas}
+
+
+\begin{frame}{Formulas}
+    \begin{equation}
+        H' = - \sum_{i=1}^{N} p_i \times \log{p_i}
+    \end{equation}
+\end{frame}
+
+
+\end{document}
