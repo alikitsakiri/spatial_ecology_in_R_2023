@@ -46,5 +46,70 @@ this is my first text of the presentation  #this is our text
     \end{equation}
 \end{frame}
 
+\begin{frame}{More difficult formulas...}
+Let's experience the easiness of writing difficult formulas:
+\begin{equation}
+K_{\alpha}=\frac{1}{\left( \sum_{i=1}^{N} p_i \times p_i^{\alpha-1} \right)^{\frac{1}{\alpha-1}}} 
+\end{equation}
+\end{frame}
+
+
+\begin{frame}{Formulas that no other software can do!}
+    \begin{equation}
+    M_d=
+    \begin{pmatrix}
+    d_{\lambda_1,\lambda_1} & d_{\lambda_1,\lambda_2} & d_{\lambda_1,\lambda_3} & \cdots & d_{\lambda_1,\lambda_n} \\
+    d_{\lambda_2,\lambda_1} & d_{\lambda_2,\lambda_2} & d_{\lambda_2,\lambda_3} & \cdots & d_{\lambda_2,\lambda_n} \\
+    d_{\lambda_3,\lambda_1} & d_{\lambda_3,\lambda_2} & d_{\lambda_3,\lambda_3} & \cdots & d_{\lambda_3,\lambda_n} \\
+    \vdots  & \vdots  & \vdots  & \ddots & \vdots  \\
+    d_{\lambda_n,\lambda_1} & d_{\lambda_n,\lambda_2} & d_{\lambda_n,\lambda_3} & \cdots & d_{\lambda_n,\lambda_n}
+    \end{pmatrix}
+    \end{equation}
+\end{frame}
+
+
+\begin{frame}{The code!}
+    \lstinputlisting[language=R]{list2.r}
+\end{frame}
+
+\begin{frame}{The code!}
+    \lstinputlisting[language=R]{list2.r} \\
+    \bigskip
+    This is the function of R we are using, where:
+    \begin{itemize}
+        \item x = input file...
+        \item $\alpha$ = blablabla
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{text plus figure}
+    \centering
+    The final result achieved was that represented in the following figure.\\
+    % \smallskip
+    \bigskip
+    \includegraphics[width=0.7 \textwidth]{andromeda.png}
+\end{frame}
+\begin{frame}{Columns in beamer}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \centering
+        Text here
+        \column{0.5\textwidth}
+        \centering
+        Text here
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Columns in beamer}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \centering
+        Text here
+        \column{0.5\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{andromeda.png}
+    \end{columns}
+\end{frame}
+
 
 \end{document}
