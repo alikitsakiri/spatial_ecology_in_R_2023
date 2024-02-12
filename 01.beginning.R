@@ -1,6 +1,7 @@
 #the first lesson
 #with R we can do math operations like summing up
 #like 2 + 3
+#this is for the comments only
 maria <- 2 +3
 
 aliki <- 5 + 3
@@ -21,7 +22,8 @@ maria2 <- c(100, 500, 600, 1000, 2000)
 plot(aliki2, maria2)
 
 plot(aliki2, maria2, xlab="number of people", ylab="microplastics")
-
+#pch = points of charachter: figures to represent points in graphs 
+#each of them associated to a number
 
 people <- aliki2
 microplastics <- maria2
@@ -30,5 +32,7 @@ plot(people, microplastics)
 plot(people, microplastics, pch=19)
 # https://www.google.com/search?client=ubuntu-sn&hs=yV6&sca_esv=570352775&channel=fs&sxsrf=AM9HkKknoSOcu32qjoErsqX4O1ILBOJX4w:1696347741672&q=point+symbols+in+R&tbm=isch&source=lnms&sa=X&ved=2ahUKEwia9brkm9qBAxVrQvEDHbEYDuMQ0pQJegQIChAB&biw=1760&bih=887&dpr=1.09#imgrc=lUw3nrgRKV8ynM
 
+ #cex is size of the data points
+#col= color
 plot(people, microplastics, pch=19, cex=2)
 plot(people, microplastics, pch=19, cex=2, col="blue")
