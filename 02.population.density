@@ -7,17 +7,18 @@ bei
 plot(bei)
 plot(bei, cex=.5)
 plot(bei, cex=.2)
+ #creation of a density map, passing from points to a continuous surface
 densitymap <- density(bei)
 densitymap
 plot(densitymap)
 points(bei, cex=.2)
 
 #now we can change the colors
-
+# the 100  indicates the amount of colors within the gradient
 colorRampPalette(c("black","red", "orange", "yellow")) (100)
 c1 <- colorRampPalette(c("black", "red", "orange", "yellow")) (100)
 plot(densitymap, col=c1)
-
+#density of trees over the area in coloured image
 #change again
 
 colorRampPalette(c("cyan", "coral", "coral2", "cyan1")) (100)
@@ -27,7 +28,7 @@ plot(bei.extra)
 elev <- bei.extra[[1]] #bei.extra$elev
 plot(elev)
 
-#multiframe
+#multiframe= plot toghether density and elevation
 
 par(mfrow=c(1,2))
 plot(densitymap)
