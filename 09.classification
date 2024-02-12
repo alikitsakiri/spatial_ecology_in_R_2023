@@ -26,9 +26,11 @@ plot(m1992c)
 #if it shows me 3 pictures its ok
 
 #classes: forest=1, human=2
+#Classification of 1992
 m1992c<- im.classify(m1992, num_clusters=2)
 plot(m1992c)
 
+#classification of 2006
 m2006c <- im.classify(m2006, num_clusters=2)
 plot(m2006c)
 
@@ -38,10 +40,12 @@ plot(m1992c[[1]])
 plot(m2006c[[1]])
 
 #how many pixels related to forest and how many pixels related to people
+#freq function calculates the frequencies for a certain pixel
 f1992 <- freq(m1992c)
 f1992
 
 #lets calculate the percentages
+#we first have to find the total number of pixels throught =ncell()
 tot1992 <- ncell(m1992c)
 #ncell is calculating the numbers of pixels
 
