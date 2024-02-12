@@ -4,7 +4,7 @@
 #first we need to install our package
 
 install.packages ("spatstat")
-
+#spatstat package: package of statistycal analysis for spatial data
 #we call our package to R
 
 library(spatstat)
@@ -20,6 +20,7 @@ plot(bei, cex=.5)
 plot(bei, cex=.2)
 
 #change the symbol - pch= point character
+#changing dimension of the points
 plot(bei, cex=.2, pch=19)
 
 #additonal datasets
