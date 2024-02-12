@@ -1,11 +1,19 @@
 install.packages("vegan")
 install.packages("overlap")
+
+#to load a specific dataset
+
 data(dune)
 dune
 library(vegan)
 ord <- decorana(dune)
 ord
+
+#detrended correspondence analisys
+
 decorana
+
+#to find tghe total axis lenght
 ldc1 = 3.7004
 ldcl2 = 3.1166
 ldc3 = 1.30055
@@ -26,10 +34,14 @@ plot(ord)
 library(overlap)
 #all the informations of the species
 
-data(kerinci)
+data(kerinci)  #data from Kerinci-Seblat National Park in Sumatra, Indonesia (Ridout and Linkie, 2009)
 summary(kerinci)
 head(kerinci)
 
+# we should pass time to radians - multiply original time by 2*pi 
+# The unit of time is the day, so values range from 0 to 1. 
+# The package overlap works entirely in radians: fitting density curves uses trigonometric functions (sin, cos, tan),
+# so this speeds up simulations. The conversion is straightforward:
 
 kerinci$timeRad <- kerinci$Time * 2 * pi
 kerinci$timeRad
