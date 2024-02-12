@@ -1,5 +1,5 @@
 # measurement of RS based variability
-
+# important from geological and biological point of view
 library(imageRy)
 library(terra)
 library(viridis)
@@ -11,10 +11,10 @@ sent <- im.import("sentinel.png")
 # band 2 = red 
 # band 3 = green
 
-im.plotRGB(sent, r=1, g=2, b=3)
-im.plotRGB(sent, r=2, g=1, b=3)
+im.plotRGB(sent, r=1, g=2, b=3) ,#first plot 'sent' image in first band near infra red, 2nd is red, 3rd is green,black part is lake 
+im.plotRGB(sent, r=2, g=1, b=3), #enhance vegetaion in green
 
-nir <- sent[[1]]
+nir <- sent[[1]]   #nir = first element of the 'sent' image ,green parts vegetation
 plot(nir)
 # LETS MOVE TO THE MOVING WINDOW TECHNIQUE 
 #its a window of 3x3 pixels that moves inside an image and calculates the standard deviation of the 9 pixels inside the window, then the window moves right of 1 pixel and then we calculate another sd
