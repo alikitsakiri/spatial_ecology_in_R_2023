@@ -15,11 +15,14 @@ library(imageRy)
 
 im.list()
 
+# importing data
+# blue band
+
 b2 <- im.import("sentinel.dolomites.b2.tif" )
 cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
 plot(b2, col=cl)
 
-b3 <- im.import("sentinel.dolomites.b3.tif"  )
+b3 <- im.import("sentinel.dolomites.b3.tif"  ) # green band
 cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
 plot(b3, col=cl)
 
@@ -78,8 +81,8 @@ pairs(stacksent)
 
 
 
-
-
+#graphs bringing more or less same information
+#histogram - representing frequency of every value of reflectance - in blue band several pixels with
 
 
 
