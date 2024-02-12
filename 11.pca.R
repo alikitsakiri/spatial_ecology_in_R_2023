@@ -12,7 +12,9 @@ pairs(sent)
 #Sentinel_4 is just a control layer, we can ignore it
 
 # perform PCA on sent 
-sentpc <- im.pca2(sent)
+sentpca <- im.pca2(sent)
+# the first component represents the most variability, in this case PC1 represents 77.26 percent of variability
+# the other components have less and less variability
 
 # we can isolate the first component like:
 sentpc 
