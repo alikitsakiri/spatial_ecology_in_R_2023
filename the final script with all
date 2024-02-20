@@ -14,52 +14,85 @@
 # 10 Variability
 # 11 Principal Component Analysis
 
-# 1 beginning
 
+#first lesson
+#the first lesson
 #with R we can do math operations like summing up
 #like 2 + 3
+#this is for the comments only
 maria <- 2 +3
+
 aliki <- 5 + 3
 aliki
+
 final <- maria * aliki
 final
+
 final^2
+
+
 aliki2 <- c(10, 20, 30, 50, 70) 
+
+
 maria2 <- c(100, 500, 600, 1000, 2000) 
+
 #we can plot the results
 plot(aliki2, maria2)
+
 plot(aliki2, maria2, xlab="number of people", ylab="microplastics")
+#pch = points of charachter: figures to represent points in graphs 
+#each of them associated to a number
+
 people <- aliki2
 microplastics <- maria2
+
 plot(people, microplastics)
 plot(people, microplastics, pch=19)
 # https://www.google.com/search?client=ubuntu-sn&hs=yV6&sca_esv=570352775&channel=fs&sxsrf=AM9HkKknoSOcu32qjoErsqX4O1ILBOJX4w:1696347741672&q=point+symbols+in+R&tbm=isch&source=lnms&sa=X&ved=2ahUKEwia9brkm9qBAxVrQvEDHbEYDuMQ0pQJegQIChAB&biw=1760&bih=887&dpr=1.09#imgrc=lUw3nrgRKV8ynM
+
+ #cex is size of the data points
+#col= color
 plot(people, microplastics, pch=19, cex=2)
 plot(people, microplastics, pch=19, cex=2, col="blue")
 
-#2.1 population density
 
+#2nd lesson
 #code related to population ecology
 #a package is needed for point pattern analysis
+
 #first we need to install our package
+
 install.packages ("spatstat")
+#spatstat package: package of statistycal analysis for spatial data
 #we call our package to R
+
 library(spatstat)
 #lets use the bei data:
+
 bei
+
 #plotting the data
+
 plot (bei)
+
 plot(bei, cex=.5)
 plot(bei, cex=.2)
+
 #change the symbol - pch= point character
+#changing dimension of the points
 plot(bei, cex=.2, pch=19)
+
 #additonal datasets
+
 bei.extra
 plot(bei.extra)
+
 #we need to use only one part of the dataset , so elevation
 #we need a symbol to link elevation to bei extra=
+
 plot(bei.extra$elev)
 elevation <- bei.extra$elev
+
 #second method to select elements 
 elevation2 <- bei.extra[[11]]
 plot(elevation2)
@@ -67,6 +100,9 @@ plot(elevation2)
 #next lesson 3.10/10
 #passing from points to a continuous surface
 densitymap
+
+
+#3 lesson
 #from the previous lesson we have the package spatstat
 #we dont need to install it aagin
 #we have to call it only, because it is already on the memory
@@ -76,17 +112,18 @@ bei
 plot(bei)
 plot(bei, cex=.5)
 plot(bei, cex=.2)
+ #creation of a density map, passing from points to a continuous surface
 densitymap <- density(bei)
 densitymap
 plot(densitymap)
 points(bei, cex=.2)
 
 #now we can change the colors
-
+# the 100  indicates the amount of colors within the gradient
 colorRampPalette(c("black","red", "orange", "yellow")) (100)
 c1 <- colorRampPalette(c("black", "red", "orange", "yellow")) (100)
 plot(densitymap, col=c1)
-
+#density of trees over the area in coloured image
 #change again
 
 colorRampPalette(c("cyan", "coral", "coral2", "cyan1")) (100)
@@ -95,7 +132,9 @@ plot(densitymap, col=c1)
 plot(bei.extra)
 elev <- bei.extra[[1]] #bei.extra$elev
 plot(elev)
-#multiframe
+
+#multiframe= plot toghether density and elevation
+
 par(mfrow=c(1,2))
 plot(densitymap)
 plot(elev)
@@ -104,7 +143,8 @@ plot(densitymap)
 plot(elev)
 plot(bei)
 
-# 2.2 population distribution
+#4 lesson
+
 # Why populations disperse over the landscape in a certain manner?
 
 library(sdm)
@@ -113,12 +153,14 @@ library(terra)
 file <- system.file("external/species.shp", package="sdm")
 
 rana <- vect(file)
+#we want to see what is contained in the occurrence column
 rana$Occurrence
 
 plot(rana)
 
 # Selecting presences
-pres <- rana[rana$Occurrence==1,]
+#== means equal (!= -->not equal)
+pres <- rana[rana$Occurrence==1,], #pres=presences
 plot(pres)
 
 # exercise: select absence and call them abse
@@ -160,10 +202,13 @@ plot(vegemap)
 points(pres, cex=.5)
 
 # exrcise: do the same with vegetation cover
+#precipitation predictor
 prec <- system.file("external/precipitation.asc", package="sdm") 
 precmap <- rast(prec) # from terra package
 plot(precmap)
 points(pres, cex=.5)
+#rana temporaria prefears high precipitation area
+
 
 # final multiframe
 
@@ -185,7 +230,30 @@ points(pres, cex=.5)
 plot(precmap)
 points(pres, cex=.5)
 
-# 3.1
+#5 lesson
+#
+library(sdm)
+library(terra) # predictors
+library(rgdal) # species
+
+file <- system.file("external/species.shp", package="sdm") 
+species <- vect(file)
+species
+plot(species)
+
+# looking at the occurrences
+species$Occurrence
+pres <- rana[rana$Occurrence==0,]
+plot(pres, col="dark blue")
+points(abse,col="light blue")
+elev <- system.file("external/species.shp", package="sdm") 
+elevmap <- rast(elev)
+plot(elevmap)
+elev <- rast("\Users\Αλίκη\AppData\Local\R\win-library\4.2\00LOCK\rgdal\libs\x64\rgdal.dll to C:\Users\Αλίκη\AppData\Local\R\win-library\4.2\rgdal\libs\x64\rgdal.dll")
+
+
+#6 lesson
+#vegetation analysis
 install.packages("vegan")
 install.packages("sdm")
 installed.packages("terra")
@@ -215,15 +283,109 @@ presence <- species[species$Occurrence == 1]
 install.packages("rana")
 library(rana)
 
-# 3.2 
+
+
+
+
+library(imageRy)
+library(terra)
+im.list()
+b2 <- im.import("sentinel.dolomites.b2.tif")
+cl <- colorRampPalette(c("black","grey","light grey")) (100)
+plot(b2, col=cl)
+b3 <- im.import("sentinel.dolomites.b3.tif")
+plot(b3, col=cl)
+b4 <- im.import("sentinel.dolomites.b4.tif")
+plot(b4, col=cl)
+#import the NIR band from sentinel -1 (band 8)
+b8 <- im.import("sentinel.dolomites.b8.tif")
+plot(b8, col=cl)
+#myltiframe
+par(mfrow=c(2,2))
+plot(b2, col=cl)
+plot(b3, col=cl)
+plot(b4, col=cl)
+plot(b8, col=cl)
+#stack images
+stacksent <- c(b2, b3, b4, b8)
+dev.off() #this closes the device
+plot(stacksent, col=cl)
+plot(stacksent[[4]], col=cl) #4th element
+
+
+#plot in a multiframe the bands with different colors ramps
+par(mfrow=c(2,2))
+
+clrgrey <- colorRampPalette(c("grey","dark grey","light grey red")) (100)
+plot(b2, col=clgrey)
+clpink <- colorRampPalette(c("hot pink1","hot pink2","light pink")) (100)
+plot(b3, col=clpink)
+clblue <- colorRampPalette(c(" dark blue","blue","light blue")) (100)
+plot(b4, col=clblue)
+clgreen <- colorRampPalette(c("dark green","green","light green")) (100)
+plot(b8, col=clgreen)
+
+
+
+#RGB space
+#stacksent :
+#band2 grey element1, stacksent[[1]]
+#band3 pink element 2, stacksent[[2]]
+#band4 blue element3, stacksent[[3]]
+#band8 green element4, stacksent[[4]]
+im.plotRGB(stacksent, r=3, g=2, b=1)
+
+
+
+
+
+
+
+
+
+
+#continue the previous lesson
+library(imageRy)
+library(terra)
+im.list()
+b2 <- im.import("sentinel.dolomites.b2.tif")
+b3 <- im.import("sentinel.dolomites.b3.tif")
+b4 <- im.import("sentinel.dolomites.b4.tif")
+b8 <- im.import("sentinel.dolomites.b8.tif")
+#stack images all together
+stacksent <- c(b2, b3, b4, b8)
+@play with the colors
+im.plotRGB(stacksent, r=3, g=2, b=1)
+im.plotRGB(stacksent, r=4, g=3, b=2)
+im.plotRGB(stacksent, r=3, g=4, b=1)
+im.plotRGB(stacksent, r=3, g=2, b=4)
+#with pair we mean to correlate all the variables (even tables)
+#we correlate to each other
+pairs(stacksent)
+#this represents every value of te system and we have their correlation 
+
+
+
+
+
+
+#7 lesson
 install.packages("vegan")
 install.packages("overlap")
+
+#to load a specific dataset
+
 data(dune)
 dune
 library(vegan)
 ord <- decorana(dune)
 ord
+
+#detrended correspondence analisys
+
 decorana
+
+#to find tghe total axis lenght
 ldc1 = 3.7004
 ldcl2 = 3.1166
 ldc3 = 1.30055
@@ -244,10 +406,14 @@ plot(ord)
 library(overlap)
 #all the informations of the species
 
-data(kerinci)
+data(kerinci)  #data from Kerinci-Seblat National Park in Sumatra, Indonesia (Ridout and Linkie, 2009)
 summary(kerinci)
 head(kerinci)
 
+# we should pass time to radians - multiply original time by 2*pi 
+# The unit of time is the day, so values range from 0 to 1. 
+# The package overlap works entirely in radians: fitting density curves uses trigonometric functions (sin, cos, tan),
+# so this speeds up simulations. The conversion is straightforward:
 
 kerinci$timeRad <- kerinci$Time * 2 * pi
 kerinci$timeRad
@@ -267,7 +433,9 @@ densityPlot(timemac, rug=TRUE)
 #like that we can compare both values
 overlapPlot(timetig, timemac)
 
-#4
+
+
+#8 lesson
 #remote sensing for ecosystem monitoring
 install.packages("devtools")
 install.packages("terra")
@@ -285,11 +453,14 @@ library(imageRy)
 
 im.list()
 
+# importing data
+# blue band
+
 b2 <- im.import("sentinel.dolomites.b2.tif" )
 cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
 plot(b2, col=cl)
 
-b3 <- im.import("sentinel.dolomites.b3.tif"  )
+b3 <- im.import("sentinel.dolomites.b3.tif"  ) # green band
 cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
 plot(b3, col=cl)
 
@@ -346,6 +517,15 @@ im.plotRGB(stacksent, r=3, g=4, b=1)
 im.plotRGB(stacksent, r=3, g=2, b=4)
 pairs(stacksent)
 
+
+
+#graphs bringing more or less same information
+#histogram - representing frequency of every value of reflectance - in blue band several pixels with
+
+
+
+
+
 # arrays
 diameter <- c(100, 10, 50, 20, 15)
 iron <- c(10, 1000, 20, 700, 900)
@@ -355,7 +535,8 @@ plot(iron, diameter) # iron and diameter are arguments!
 plot(iron, diameter, pch=19)
 plot(iron, diameter, pch=19, cex=2, col="red")
 
-#5
+
+#9 lesson
 #vegetation 
 library(imageRy)
 library(terra)
@@ -397,18 +578,21 @@ im.plotRGB(m1992, 2, 1, 3)
 im.plotRGB(m1992, 2, 3, 1)
 m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")
 im.plotRGB(m2006, r=2, g=3, b=1)
-par(mfrow=c(1,2))
-im.plotRGB(m1992, 2, 3, 1)
-im.plotRGB(m2006, 2, 3, 1)
+par(mfrow=c(1,2)) ,#opens multiframe with 1 row 2 columns
+im.plotRGB(m1992, 2, 3, 1)     #opens multiframe with 1 row 2 columns
+im.plotRGB(m2006, 2, 3, 1)     #sets 2006 in blue band as 2nd element of the multiframe
 dev.off()
 plot(m1992[[1]])
 dvi1992 = m1992[[1]] - m1992[[2]]
 plot(dvi1992)
 cl <- colorRampPalette(c("darkblue", "yellow", "red", "black")) (100)
 plot(dvi1992, col=cl)
+
+#for the 2006
 dvi2006 = m2006[[1]] - m2006[[2]]
 plot(dvi2006, col=cl)
 #NDVI
+#to compare images with different bits - you need to use NDVI (not DVI) - it always ranges from -1 to 1
 ndvi1992 = (m1992[[1]]- m1992[[2]]) / (m1992[[1]] + m1992[[2]])
 ndvi1992 = dvi1992 / (m1992[[1]] + m1992[[2]])
 plot(ndvi1992, col=cl)
@@ -424,7 +608,23 @@ par(mfrow=c(1,2))
 plot(ndvi1992, col=cl)
 plot(ndvi2006, col=cl)
 
-#6
+
+#10 lesson
+im.list()
+im.import()
+#install_github("") to instal packages from github
+b2 <- im.import("sentinel.dolomites.b2.tif" )
+#lets change the colors
+clb <- colorRampPalette(c("dark grey","grey","light grey")) (100) # 100 is the amount of colours in the gradient
+plot(b2, col=clb)
+#import the green band from sentinel - 2 (band3)
+b3 <- im.import("sentinel.dolomites.b3.tif" )
+cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
+plot(b2, col=cl)
+
+
+
+#11 lesson
 #time series anlysis
 #again terra
 library(imageRy)
@@ -475,92 +675,8 @@ plot(difg, col=cldif)
 im.plotRGB(stackg, r=1, g=2, b=3)
 #we can see the colors of red, green, black
 
-#extra
-im.list()
-im.import()
-#install_github("") to instal packages from github
-b2 <- im.import("sentinel.dolomites.b2.tif" )
-#lets change the colors
-clb <- colorRampPalette(c("dark grey","grey","light grey")) (100) # 100 is the amount of colours in the gradient
-plot(b2, col=clb)
-#import the green band from sentinel - 2 (band3)
-b3 <- im.import("sentinel.dolomites.b3.tif" )
-cl <- colorRampPalette(c("dark grey","grey","light grey")) (100)
-plot(b2, col=cl)
 
-
-library(imageRy)
-library(terra)
-im.list()
-b2 <- im.import("sentinel.dolomites.b2.tif")
-cl <- colorRampPalette(c("black","grey","light grey")) (100)
-plot(b2, col=cl)
-b3 <- im.import("sentinel.dolomites.b3.tif")
-plot(b3, col=cl)
-b4 <- im.import("sentinel.dolomites.b4.tif")
-plot(b4, col=cl)
-#import the NIR band from sentinel -1 (band 8)
-b8 <- im.import("sentinel.dolomites.b8.tif")
-plot(b8, col=cl)
-#myltiframe
-par(mfrow=c(2,2))
-plot(b2, col=cl)
-plot(b3, col=cl)
-plot(b4, col=cl)
-plot(b8, col=cl)
-#stack images
-stacksent <- c(b2, b3, b4, b8)
-dev.off() #this closes the device
-plot(stacksent, col=cl)
-plot(stacksent[[4]], col=cl) #4th element
-
-
-#plot in a multiframe the bands with different colors ramps
-par(mfrow=c(2,2))
-
-clrgrey <- colorRampPalette(c("grey","dark grey","light grey red")) (100)
-plot(b2, col=clgrey)
-clpink <- colorRampPalette(c("hot pink1","hot pink2","light pink")) (100)
-plot(b3, col=clpink)
-clblue <- colorRampPalette(c(" dark blue","blue","light blue")) (100)
-plot(b4, col=clblue)
-clgreen <- colorRampPalette(c("dark green","green","light green")) (100)
-plot(b8, col=clgreen)
-
-
-
-#RGB space
-#stacksent :
-#band2 grey element1, stacksent[[1]]
-#band3 pink element 2, stacksent[[2]]
-#band4 blue element3, stacksent[[3]]
-#band8 green element4, stacksent[[4]]
-im.plotRGB(stacksent, r=3, g=2, b=1)
-
-#continue the previous lesson
-library(imageRy)
-library(terra)
-im.list()
-b2 <- im.import("sentinel.dolomites.b2.tif")
-b3 <- im.import("sentinel.dolomites.b3.tif")
-b4 <- im.import("sentinel.dolomites.b4.tif")
-b8 <- im.import("sentinel.dolomites.b8.tif")
-#stack images all together
-stacksent <- c(b2, b3, b4, b8)
-@play with the colors
-im.plotRGB(stacksent, r=3, g=2, b=1)
-im.plotRGB(stacksent, r=4, g=3, b=2)
-im.plotRGB(stacksent, r=3, g=4, b=1)
-im.plotRGB(stacksent, r=3, g=2, b=4)
-#with pair we mean to correlate all the variables (even tables)
-#we correlate to each other
-pairs(stacksent)
-#this represents every value of te system and we have their correlation 
-
-
-
-#7
-
+#12 lesson
 #external data
 #we have download the data before
 #we use the 'set working directly'
@@ -603,8 +719,8 @@ plotRGB(granchaco, r=1, g=2, b=3)
 #the rast function can do the same thing as we did for the previous classes with matogrosso
 
 
-#8
 
+#13 lesson
 #we will talk about copernicus and its data
 #we use this link https://land.copernicus.vgt.vito.be/PDF/portal/Application.html
 #register and log in
@@ -640,7 +756,8 @@ plot(soilm2023_24)
 soilm2023_24 <- crop(soilm2023_24, ext)
 plot(soilm2023_24[[1]], col=cl)
 
-#9
+
+#14 lesson
 #classification of pixels in the image 
 #classifying satellite images and estimate the amount change
 #with the function of im.classify(sun)
@@ -669,9 +786,11 @@ plot(m1992c)
 #if it shows me 3 pictures its ok
 
 #classes: forest=1, human=2
+#Classification of 1992
 m1992c<- im.classify(m1992, num_clusters=2)
 plot(m1992c)
 
+#classification of 2006
 m2006c <- im.classify(m2006, num_clusters=2)
 plot(m2006c)
 
@@ -681,10 +800,12 @@ plot(m1992c[[1]])
 plot(m2006c[[1]])
 
 #how many pixels related to forest and how many pixels related to people
+#freq function calculates the frequencies for a certain pixel
 f1992 <- freq(m1992c)
 f1992
 
 #lets calculate the percentages
+#we first have to find the total number of pixels throught =ncell()
 tot1992 <- ncell(m1992c)
 #ncell is calculating the numbers of pixels
 
@@ -727,9 +848,12 @@ p1 <- ggplot(tabout, aes(x=class, y=y1992, color=class)) + geom_bar(stat="identi
 p2 <- ggplot(tabout, aes(x=class, y=y2006, color=class)) + geom_bar(stat="identity", fill="white") + ylim(c(0,100))
 p1+p2
 
-#10
-# measurement of RS based variability
 
+
+
+#15 lesson
+# measurement of RS based variability
+# important from geological and biological point of view
 library(imageRy)
 library(terra)
 library(viridis)
@@ -741,10 +865,10 @@ sent <- im.import("sentinel.png")
 # band 2 = red 
 # band 3 = green
 
-im.plotRGB(sent, r=1, g=2, b=3)
-im.plotRGB(sent, r=2, g=1, b=3)
+im.plotRGB(sent, r=1, g=2, b=3) ,#first plot 'sent' image in first band near infra red, 2nd is red, 3rd is green,black part is lake 
+im.plotRGB(sent, r=2, g=1, b=3), #enhance vegetaion in green
 
-nir <- sent[[1]]
+nir <- sent[[1]]   #nir = first element of the 'sent' image ,green parts vegetation
 plot(nir)
 # LETS MOVE TO THE MOVING WINDOW TECHNIQUE 
 #its a window of 3x3 pixels that moves inside an image and calculates the standard deviation of the 9 pixels inside the window, then the window moves right of 1 pixel and then we calculate another sd
@@ -772,7 +896,9 @@ plot(sd7, col=viridisc)    # in the upper left part we can see a lot of white, w
 
 # How can we decide which layer we should apply/calculate the standard deviation to? With multivariate analysis.
 
-#11
+
+
+#16 lesson
 #We'll perform the PCA and use the PC1 to make the calculation of sd. 
 library(imageRy)
 library(terra)
@@ -787,7 +913,9 @@ pairs(sent)
 #Sentinel_4 is just a control layer, we can ignore it
 
 # perform PCA on sent 
-sentpc <- im.pca2(sent)
+sentpca <- im.pca2(sent)
+# the first component represents the most variability, in this case PC1 represents 77.26 percent of variability
+# the other components have less and less variability
 
 # we can isolate the first component like:
 sentpc 
@@ -822,3 +950,285 @@ names(sdstack) <- c("sd3", "sd7", "pc1sd3", "pc1sd7")
 plot(sdstack, col=viridisc)
 
 #the sd represents the amount of variability in a certain moving window; the function focal() can be used to calculate other statistics, like mean, etc., on a single layer.
+
+
+
+
+
+
+
+
+#17 lesson
+#we are introducing LaTeX
+#problems with word :
+#formulas
+#layout : header
+#figures, you cant do changes automatically but manually
+#bibliography
+%this is a comment
+% [] for structures!
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{This is my first document in LateX}
+\author{Aliki Maria Tsakiri }
+%\date{12 December 2023} - the date is always appeared
+%\date{} - this is to cancel the date
+\begin{document}
+
+\maketitle
+\begin{abstract}
+    we can put everything here
+    i can write parts of my project
+    and this will appear on the project
+% this is just en example of text : 
+Life is an intricate tapestry woven with the threads of time, an ever-unfolding narrative of experiences and emotions.
+It begins with the first breath, a moment of inception that propels us into a world brimming with possibilities. 
+Childhood dances with the pure joy of discovery, innocence guiding our steps through a landscape of wonder. 
+Adolescence introduces the turbulence of self-discovery, a rollercoaster of emotions that shape the contours of identity. 
+The journey through adulthood navigates the ebbs and flows of responsibility, love, and ambition, a complex mosaic of relationships and aspirations...... finish here the example
+\end{abstract}
+
+
+\section{Introduction}
+\label{secIntro}
+\ref{secIntro}
+Life is an intricate tapestry woven with the threads of time, an ever-\smallskip unfolding narrative of experiences and emotions.
+\bigskip It begins with the first breath, a moment of inception that propels us into a world brimming with possibilities. Childhood dances with the pure joy of discovery, innocence guiding our steps through a landscape of wonder. The journey through adulthood navigates the ebbs and flows of responsibility, love, and ambition, a complex mosaic of relationships and aspirations. 
+\section{Methods}
+for this thesis, i made the using formula
+\begin{equation}
+    a = b + c
+    \label{eqSum}
+\end{equation}
+
+\begin{equation}
+    F = \sqrt[n]{G \times\frac{m_1 \times m_2}{d^2}}
+    \label{eqNewton}
+\end{equation}
+
+starting from equation \ref{eqSum} ecc, ecc
+As we have seen in equation \ref{eqNewton}, ecc ecc ecc
+as we saw to section \ref{secIntro} ecc ecc
+\section{Results}
+ecc ecc
+
+
+
+\begin{figure}
+\centering
+
+\includegraphics[width=\textwidth]{images.jpg} %just an image i download form internet
+\caption{butterfly}
+\label{ladakdakjd}
+\end{figure}
+
+\section{Discussion}
+\end{document}
+
+
+
+
+
+
+
+#18 lesson
+---
+title: "MarkdownReport"
+author: "Aliki Maria Tsakiri"
+date: "2024-01-09"
+output: html_document
+---
+
+# My first markdown document!
+
+Here you can add some text if you want!
+
+In this case we obtain a result
+```{r, eval=T}         # are stating what language we are using (in our case R), and if we want to evaluated it or not (eval = True)
+2 + 3                  # when we click 'knit' in R, the code will show in a grey box, and the result will be in a white box below
+```
+In this case we DO NOT obtain a result    # we don't put the hashtag here because we want this sentence to show up in the document
+```{r, eval=F}         
+2 + 3                 
+```
+
+Using proper packages; the imageRy package has been built in Alma Mater for learning remote sensing
+```{r, eval=F}         
+library(imageRy)                 
+```
+Let's import some data, starting with a list of data
+```{r, eval=T}         
+im.list()                 
+```
+Importing Mato grosso area image:
+```{r, eval=T}         
+mato1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
+```
+Importing Mato grosso area image:
+```{r, eval=T, warning=F}         
+mato1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
+```
+In order to get info on the image, just type the name of the object:
+```{r, eval=T}         
+mato1992                 
+```
+Making a new plot of the Mato Grosso area with the NIR ontop of the green component of the RGB space:
+```{r, eval=T}         
+im.plotRGB(mato1992, r=2, g=1, b=3)                
+```
+Plotting several images all together:
+```{r, eval=T} 
+par(mfrow(2,2))
+im.plotRGB(mato1992, r=1, g=2, b=3)
+im.plotRGB(mato1992, r=1, g=2, b=3) 
+im.plotRGB(mato1992, r=1, g=2, b=3) 
+im.plotRGB(mato1992, r=1, g=2, b=3) 
+```
+Calculating spectral indices
+```{r, eval=T} 
+library(terra)
+library(viridisc)
+dvi <- mato1992[[1]]-mato1992[[2]]
+viridisc <- colorRampPalette(viridis(7))(255)
+plot(dvi, col=viridisc)
+```
+
+Calculating Variability
+```{r, eval=T} 
+sd3 <- focal(mato1992[[1]], matrix(1/9, 3, 3), fun=sd)
+plot(sd3, col = viridisc)
+
+Calculating Variability
+```{r, eval=T} 
+sd5 <- focal(mato1992[[1]], matrix(1/25, 5, 5), fun=sd)
+plot(sd5, col = viridisc)
+
+
+
+
+#19 lesson
+#lets do our first presentation in latex
+\documentclass{beamer}
+\usepackage{graphicx} % Required for inserting images
+
+\usetheme{Frankfurt} #we can use any theme we want
+\usecolortheme{crane} #we can use any color we want (crane= orange)
+\title{Presentation} #the title will be shown like this
+\author{alikimaria.tsakiri } #then it will be shown the name 
+\date{December 2023}#and then the date
+
+\begin{document}
+
+\maketitle
+
+% \section{Introduction}
+\begin{frame}{slide in Latex} #this will be shown on the top of the slide
+this is my first text of the presentation  #this is our text  
+\end{frame}
+\begin{frame}{items in latex beamer}
+    the main components are ecc ecc ecc
+    \begin{itemize}
+        \item population ecology
+        \item \pause community #pause to presents the item step by step not everything on the same slide, like each other to each slide, like a presentation step by step
+        \item \pause ecosystem
+    \end{itemize}
+\end{frame}
+\begin{frame} (image)
+\centering
+\includegraphics[width=0.4 \textwidth]{images.jpg}
+\end{frame}
+\begin{frame} (image)
+\centering
+\includegraphics[width=0.4 \textwidth]{images.jpg}
+\includegraphics[width=0.4 \textwidth]{images.jpg}\\
+\smallskip #or bigskip or nothing even
+\includegraphics[width=0.4 \textwidth]{images.jpg}
+\includegraphics[width=0.4 \textwidth]{images.jpg}\\
+\end{frame}
+
+\section{Formulas}
+
+
+\begin{frame}{Formulas}
+    \begin{equation}
+        H' = - \sum_{i=1}^{N} p_i \times \log{p_i}
+    \end{equation}
+\end{frame}
+
+\begin{frame}{More difficult formulas...}
+Let's experience the easiness of writing difficult formulas:
+\begin{equation}
+K_{\alpha}=\frac{1}{\left( \sum_{i=1}^{N} p_i \times p_i^{\alpha-1} \right)^{\frac{1}{\alpha-1}}} 
+\end{equation}
+\end{frame}
+
+
+\begin{frame}{Formulas that no other software can do!}
+    \begin{equation}
+    M_d=
+    \begin{pmatrix}
+    d_{\lambda_1,\lambda_1} & d_{\lambda_1,\lambda_2} & d_{\lambda_1,\lambda_3} & \cdots & d_{\lambda_1,\lambda_n} \\
+    d_{\lambda_2,\lambda_1} & d_{\lambda_2,\lambda_2} & d_{\lambda_2,\lambda_3} & \cdots & d_{\lambda_2,\lambda_n} \\
+    d_{\lambda_3,\lambda_1} & d_{\lambda_3,\lambda_2} & d_{\lambda_3,\lambda_3} & \cdots & d_{\lambda_3,\lambda_n} \\
+    \vdots  & \vdots  & \vdots  & \ddots & \vdots  \\
+    d_{\lambda_n,\lambda_1} & d_{\lambda_n,\lambda_2} & d_{\lambda_n,\lambda_3} & \cdots & d_{\lambda_n,\lambda_n}
+    \end{pmatrix}
+    \end{equation}
+\end{frame}
+
+
+\begin{frame}{The code!}
+    \lstinputlisting[language=R]{list2.r}
+\end{frame}
+
+\begin{frame}{The code!}
+    \lstinputlisting[language=R]{list2.r} \\
+    \bigskip
+    This is the function of R we are using, where:
+    \begin{itemize}
+        \item x = input file...
+        \item $\alpha$ = blablabla
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{text plus figure}
+    \centering
+    The final result achieved was that represented in the following figure.\\
+    % \smallskip
+    \bigskip
+    \includegraphics[width=0.7 \textwidth]{andromeda.png}
+\end{frame}
+\begin{frame}{Columns in beamer}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \centering
+        Text here
+        \column{0.5\textwidth}
+        \centering
+        Text here
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Columns in beamer}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \centering
+        Text here
+        \column{0.5\textwidth}
+        \centering
+        \includegraphics[width=.8\textwidth]{andromeda.png}
+    \end{columns}
+\end{frame}
+
+
+\end{document}
+
+
+
+
+
+
+#20 lesson
+
