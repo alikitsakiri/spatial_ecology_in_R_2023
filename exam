@@ -1,7 +1,123 @@
 #exam code
 #monitoring the mean temperatures of the mediterranean basin
-#from the 1991 until 2020
+#from the 1940 until 2022
 #30 years of observations
 #only the month of December
-#prediction for 2024 and 2034
+#prediction for 2024
 #dataset from Copernicus ERA5
+### Installing libraries ###
+
+#install.packages("tidyverse")
+#install.packages("forecast")
+#install.packages("lubridate")
+
+### Loading libraries ###
+
+library(tidyverse) ## Data processing ##
+library(dplyr) ## Data processing ##
+library(forecast) ## Predictions ##
+library(lubridate) ## Working with Dates ##
+
+
+### Setting working directory ###
+
+setwd("________")
+Data_Temperature <- read_excel("Data Temperature.xlsx")
+
+### Data cleaning ###
+## Check is there any NAs in the file ##
+sum(is.na(Data_Temperature)) ## No missing values
+
+### Data preparation ###
+
+### Transform the dates ###
+
+Data_Temperature$Date <- as.character(Data_Temperature$Date)
+Data_Temperature$Date <- as.Date(Data_Temperature$Date, format = "%Y%m%d")
+
+### Convert Date to year ###
+
+Data_Temperature$Year <- year(Data_Temperature$Date)
+
+### Change the order of the column ###
+Data_Temperature <- Data_Temperature %>%
+  select(Date,Year,Temperature)
+
+### Filter data for the desired range (1940 - 2022) and calculate average temperature for each year's December ###
+average_temperature_per_year <- Data_Temperature %>%
+  filter(Year >= 1940 & Year <= 2022) %>%
+  group_by(Year) %>%
+  summarise(Average_Temperature = mean(Temperature, na.rm = TRUE)) %>%
+  mutate(Average_Temperature = round(Average_Temperature, digits = 1))
+
+### Output the result ###
+print(average_temperature_per_year)
+
+## Ploting the average temparature of December since 1940 ###
+ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  labs(title = "Average Yearly December Temperature (1940-2022)",
+       x = "Year",
+       y = "Average Temperature (?C)") +
+  theme_minimal()
+
+## Ploting the average temparature of December since 1940 ###
+ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +  # Add trend line
+  labs(title = "Average Yearly December Temperature (1940-2022)",
+       x = "Year",
+       y = "Average Temperature (?C)") +
+  theme_minimal()
+
+### Climate reference ###
+
+climate_reference <- mean(average_temperature_per_year$Average_Temperature[54:83])
+
+### Climate anomalies ###
+
+climate_anomalies <- data.frame(average_temperature_per_year$Average_Temperature - climate_reference)
+colnames(climate_anomalies) <- "anomalies"
+climate_anomalies$anomalies <- round(climate_anomalies$anomalies,digits = 2)
+
+### Merge Datasets ###
+climate_anomalies$Year <- average_temperature_per_year$Year
+
+climate_anomalies <- climate_anomalies %>%
+  select(Year,anomalies)
+
+### Plot anomalies ###
+plot(climate_anomalies)
+
+### Fit Arima model to make predictions ###
+arima_model <- auto.arima(average_temperature_per_year$Average_Temperature)
+
+### Make predictions for the next 10 years ###
+forecast_values <- forecast(arima_model, h = 1)
+
+### Print the forecasted values for the next 10 years ###
+print(forecast_values)
+
+# Add forecasted value to the data frame
+forecast_data <- data.frame(
+  Year = max(average_temperature_per_year$Year) + 1,
+  Average_Temperature = forecast_values$mean
+)
+
+# Plot the average temperature of December since 1940
+p <- ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
+  geom_line(color = "blue") +
+  geom_point(color = "blue") +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +  # Add trend line
+  labs(title = "Average Yearly December Temperature (1940-2022)",
+       x = "Year",
+       y = "Average Temperature (?C)") +
+  theme_minimal()
+
+# Add forecasted point to the plot
+p <- p + geom_point(data = forecast_data, aes(x = Year, y = Average_Temperature), color = "green")
+
+# Print the plot
+print(p)
