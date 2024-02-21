@@ -1,51 +1,60 @@
+#exam code
+#monitoring the mean temperatures of the mediterranean basin
+#from the 1940 until 2022
+#only the month of December of each year
+#prediction for 2024
+#dataset from Copernicus ERA5
 
+
+#lets begin
+
+#installing the packages
 install.packages("tidyverse")
 install.packages("forecast")
 install.packages("lubridate")
 install.packages("readxl")
-### Loading libraries ###
 
-library(tidyverse) ## Data processing ##
-library(dplyr) ## Data processing ##
-library(forecast) ## Predictions ##
-library(lubridate) ## Working with Dates ##
-library(readxl)
+#Loading libraries
 
-### Setting working directory ###
+library(tidyverse) #Data processing
+library(dplyr) #Data processing
+library(forecast) #Predictions
+library(lubridate) #Working with Dates #the column transform in dates
+library(readxl) #Reading the excel file
+
+#Setting working directory
 
 setwd("C:/Users/Αλίκη/Desktop")
 Data_Temperature <- read_excel("Data-Temperature.xlsx")
 
-### Data cleaning ###
-## Check is there any NAs in the file ##
-sum(is.na(Data_Temperature)) ## No missing values
+#Data cleaning
+#Check is there any NAs in the file
+sum(is.na(Data_Temperature)) #No missing values
 
-### Data preparation ###
+#Data preparation
 
-### Transform the dates ###
-
+#Transform the dates from numeric variable (character) into dates
 Data_Temperature$Date <- as.character(Data_Temperature$Date)
 Data_Temperature$Date <- as.Date(Data_Temperature$Date, format = "%Y%m%d")
 
-### Convert Date to year ###
-
+#Convert Date to year
 Data_Temperature$Year <- year(Data_Temperature$Date)
 
-### Change the order of the column ###
+#Change the order of the column
 Data_Temperature <- Data_Temperature %>%
   select(Date,Year,Temperature)
 
-### Filter data for the desired range (1940 - 2022) and calculate average temperature for each year's December ###
+#Filter data for the desired range (1940 - 2022) and calculate average temperature for each year's December
 average_temperature_per_year <- Data_Temperature %>%
   filter(Year >= 1940 & Year <= 2022) %>%
   group_by(Year) %>%
   summarise(Average_Temperature = mean(Temperature, na.rm = TRUE)) %>%
   mutate(Average_Temperature = round(Average_Temperature, digits = 1))
 
-### Output the result ###
+#Output the result
 print(average_temperature_per_year)
 
-## Ploting the average temparature of December since 1940 ###
+#Ploting the average temparature of December since 1940
 ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
@@ -54,7 +63,7 @@ ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
        y = "Average Temperature (?C)") +
   theme_minimal()
 
-## Ploting the average temparature of December since 1940 ###
+## Ploting the average temparature of December since 1940 with a trend line
 ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
   geom_line(color = "blue") +
   geom_point(color = "blue") +
@@ -64,35 +73,35 @@ ggplot(average_temperature_per_year, aes(x = Year, y = Average_Temperature)) +
        y = "Average Temperature (?C)") +
   theme_minimal()
 
-### Climate reference ###
-
+#Climate reference to compute the anomaly 
+#computed for the years 1993 to 2022
+#30 years of observations needed to compute the climate reference
 climate_reference <- mean(average_temperature_per_year$Average_Temperature[54:83])
 
-### Climate anomalies ###
-
+#Climate anomalies
 climate_anomalies <- data.frame(average_temperature_per_year$Average_Temperature - climate_reference)
 colnames(climate_anomalies) <- "anomalies"
 climate_anomalies$anomalies <- round(climate_anomalies$anomalies,digits = 2)
 
-### Merge Datasets ###
+#Merge Datasets
 climate_anomalies$Year <- average_temperature_per_year$Year
 
 climate_anomalies <- climate_anomalies %>%
   select(Year,anomalies)
 
-### Plot anomalies ###
+#Plot anomalies
 plot(climate_anomalies)
 
-### Fit Arima model to make predictions ###
+#Fit Arima model to make predictions
 arima_model <- auto.arima(average_temperature_per_year$Average_Temperature)
 
-### Make predictions for the next 10 years ###
+#Make predictions for the next December of 2024
 forecast_values <- forecast(arima_model, h = 1)
 
-### Print the forecasted values for the next 10 years ###
+#Print the forecasted value
 print(forecast_values)
 
-#the predicted value is = 17.65576
+## the predicted value is = 17.65576 ##
 
 # Add forecasted value to the data frame
 forecast_data <- data.frame(
@@ -116,4 +125,4 @@ p <- p + geom_point(data = forecast_data, aes(x = Year, y = Average_Temperature)
 # Print the plot
 print(p)
 
-
+##END##
