@@ -1,10 +1,4 @@
-#exam code
-#monitoring the mean temperatures of the mediterranean basin
-#from the 1940 until 2022
-#30 years of observations
-#only the month of December
-#prediction for 2024
-#dataset from Copernicus ERA5
+
 ### Installing libraries ###
 
 #install.packages("tidyverse")
